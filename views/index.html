@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sample of websocket with golang</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            var ws = new WebSocket('ws://' + window.location.host + '/ws');
+            ws.onmessage = function (e) {
+                $('<li>').text(event.data).appendTo($ul);
+                //添加返回消息 告诉服务器 此页面还存在
+                //{"message":"data"}
+                var obj = {};
+                obj.message = 'index.html 还活着 ' + new Date().toLocaleString();
+                console.log(obj);
+                obj = JSON.stringify(obj);
+                ws.send(obj);
+
+            };
+            var $ul = $('#msg-list');
+        });
+    </script>
+</head>
+<body>
+<h1>登录后会在此显示ip</h1>
+<ul id="msg-list"></ul>
+</body>
+</html>
