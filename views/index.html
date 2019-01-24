@@ -8,7 +8,7 @@
     <script>
         $(function () {
             var ws = new WebSocket('ws://' + window.location.host + '/ws');
-            ws.onmessage = function (e) {
+            ws.onmessage = function (event) {
                 $('<li>').text(event.data).appendTo($ul);
                 //添加返回消息 告诉服务器 此页面还存在
                 //{"message":"data"}
